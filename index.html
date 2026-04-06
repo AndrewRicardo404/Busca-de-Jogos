@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Busca de Jogos</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+  <h1>Busca de Jogos 🎮</h1>
+
+  <form id="formBusca">
+    <input type="text" id="nomeGame" placeholder="Digite o nome do jogo">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <h2>Resultados</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Game ID</th>
+        <th>Steam ID</th>
+        <th>Imagem</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Desconto</th>
+        <th>Loja</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaGames"></tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
