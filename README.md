@@ -13,5 +13,5 @@ Aplicação web que busca jogos usando o API CheapShark.
 - CSS
 - JavaScript Vanilla
 
-## Como executar
-Abra o index.html no navegador e Digite pelo nome de um Jogo.
+## Link para Acesso
+(https://andrewricardo404.github.io/Busca-de-Jogos/)
