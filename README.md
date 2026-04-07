@@ -5,7 +5,7 @@ Aplicação web que busca jogos usando o API CheapShark.
 ## Como Funciona?
 - Buscar jogos
 - Exibir em tabela
-- Salvar no localStorage
+- Exibir os Descontos, Preços, Nomes e a Imagem
 - Remover itens
 
 ## Códigos Usados
