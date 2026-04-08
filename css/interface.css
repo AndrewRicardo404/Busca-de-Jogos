@@ -1,1 +1,47 @@
+body {
+  font-family: Arial;
+  text-align: center;
+  background-color: #121212;
+  color: white;
+}
 
+h1 {
+  color: #00ffcc;
+}
+
+form {
+  margin: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px;
+  background-color: #00ffcc;
+  border: none;
+  cursor: pointer;
+}
+
+table {
+  margin: auto;
+  width: 80%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 10px;
+}
+
+th {
+  background-color: #00ffcc;
+  color: black;
+}
+
+button.delete {
+  background-color: red;
+  color: white;
+}
