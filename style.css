@@ -3,18 +3,20 @@ body {
   text-align: center;
 }
 
-input {
-  padding: 5px;
-}
-
-button {
-  padding: 5px;
-  cursor: pointer;
+input, button {
+  padding: 8px;
+  margin: 5px;
 }
 
 table {
   margin: auto;
   margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
 }
 
 img {
