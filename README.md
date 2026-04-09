@@ -1,17 +1,18 @@
 # 🎮 Busca de Jogos
 
-Aplicação web que busca jogos usando o API CheapShark.
+Aplicação web que busca jogos usando a API CheapShark.
 
-## Como Funciona?
+## 🚀 Funcionalidades
 - Buscar jogos
-- Exibir em tabela
-- Exibir os Descontos, Preços, Nomes e a Imagem
+- Exibir resultados em tabela
+- Mostrar preços, nomes e imagens
 - Remover itens
 
-## Códigos Usados
+## 🛠️ Tecnologias utilizadas
 - HTML
 - CSS
-- JavaScript Vanilla
+- JavaScript
 
-## Link para Acesso
-(https://andrewricardo404.github.io/Busca-de-Jogos/)
+## 🌐 Acesso ao projeto
+Acesse aqui:  
+https://andrewricardo404.github.io/Busca-de-Jogos/
