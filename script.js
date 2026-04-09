@@ -1,101 +1,66 @@
-const form = document.getElementById("formBusca");
-const tabela = document.getElementById("tabelaGames");
+const form = document.getElementById("form");
+const tabela = document.getElementById("tabela");
 
-/**
- * Salva dados no localStorage
- * @param {Array} lista
- */
-function salvarLocal(lista) {
-  localStorage.setItem("games", JSON.stringify(lista));
-}
-
-/**
- * Carrega dados do localStorage
- * @returns {Array}
- */
-function carregarLocal() {
+function pegar() {
   return JSON.parse(localStorage.getItem("games")) || [];
 }
 
-/**
- * Renderiza tabela
- * @param {Array} games
- */
-function renderizarTabela(games) {
+function salvar(lista) {
+  localStorage.setItem("games", JSON.stringify(lista));
+}
+
+function mostrar() {
+  const lista = pegar();
   tabela.innerHTML = "";
 
-  games.forEach((game, index) => {
-    const linha = `
+  lista.forEach((g, i) => {
+    tabela.innerHTML += `
       <tr>
-        <td>${game.gameID}</td>
-        <td>${game.steamID}</td>
-        <td><img src="${game.imagem}" width="80"></td>
-        <td>${game.nome}</td>
-        <td>R$ ${game.preco}</td>
-        <td>${game.oferta}</td>
-        <td>${game.loja}</td>
-        <td><button class="delete" onclick="excluir(${index})">X</button></td>
+        <td>${g.id}</td>
+        <td>${g.nome}</td>
+        <td>${g.preco}</td>
+        <td><img src="${g.img}"></td>
+        <td><button onclick="del(${i})">X</button></td>
       </tr>
     `;
-    tabela.innerHTML += linha;
   });
 }
 
-/**
- * Exclui item da lista
- * @param {number} index
- */
-function excluir(index) {
-  let lista = carregarLocal();
-  lista.splice(index, 1);
-  salvarLocal(lista);
-  renderizarTabela(lista);
+function del(i) {
+  const lista = pegar();
+  lista.splice(i, 1);
+  salvar(lista);
+  mostrar();
 }
 
-/**
- * Busca jogos na API
- * @param {string} nome
- */
-async function buscarGame(nome) {
-  const url = `https://www.cheapshark.com/api/1.0/games?title=${nome}`;
-
-  const resposta = await fetch(url);
-  const dados = await resposta.json();
-
-  let lista = carregarLocal();
-
-  dados.slice(0, 5).forEach(game => {
-
-    const imagem = game.steamAppID
-      ? `https://cdn.akamai.steamstatic.com/steam/apps/${game.steamAppID}/capsule_sm_120.jpg`
-      : "https://via.placeholder.com/120";
-
-    lista.push({
-      nome: game.external,
-      preco: game.cheapest,
-      oferta: game.cheapestDealID ? "Sim" : "Não",
-      gameID: game.gameID,
-      steamID: game.steamAppID || "N/A",
-      imagem: imagem,
-      loja: "CheapShark"
-    });
-  });
-
-  salvarLocal(lista);
-  renderizarTabela(lista);
-}
-
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const nome = document.getElementById("nomeGame").value;
+  const nome = document.getElementById("input").value;
 
-  if (!nome.trim()) {
-    alert("Digite um nome válido!");
+  if (!nome) {
+    alert("digita algo");
     return;
   }
 
-  buscarGame(nome);
+  const res = await fetch(`https://www.cheapshark.com/api/1.0/games?title=${nome}`);
+  const dados = await res.json();
+
+  const lista = pegar();
+
+  dados.slice(0, 5).forEach(g => {
+    lista.push({
+      id: g.gameID,
+      nome: g.external,
+      preco: g.cheapest,
+      img: g.steamAppID
+        ? `https://cdn.akamai.steamstatic.com/steam/apps/${g.steamAppID}/capsule_sm_120.jpg`
+        : "https://via.placeholder.com/120"
+    });
+  });
+
+  salvar(lista);
+  mostrar();
 });
 
-renderizarTabela(carregarLocal());
+mostrar();
