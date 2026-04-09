@@ -1,14 +1,17 @@
 const form = document.getElementById("form");
 const tabela = document.getElementById("tabela");
 
+// pegar dados
 function pegar() {
   return JSON.parse(localStorage.getItem("games")) || [];
 }
 
+// salvar dados
 function salvar(lista) {
   localStorage.setItem("games", JSON.stringify(lista));
 }
 
+// mostrar na tabela
 function mostrar() {
   const lista = pegar();
   tabela.innerHTML = "";
@@ -19,27 +22,30 @@ function mostrar() {
         <td>${g.id}</td>
         <td>${g.nome}</td>
         <td>${g.preco}</td>
+        <td>${g.loja}</td>
         <td><img src="${g.img}"></td>
-        <td><button onclick="del(${i})">X</button></td>
+        <td><button onclick="deletar(${i})">X</button></td>
       </tr>
     `;
   });
 }
 
-function del(i) {
+// deletar item
+function deletar(i) {
   const lista = pegar();
   lista.splice(i, 1);
   salvar(lista);
   mostrar();
 }
 
+// buscar na API
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const nome = document.getElementById("input").value;
+  const nome = document.getElementById("nome").value;
 
-  if (!nome) {
-    alert("digita algo");
+  if (nome.trim() === "") {
+    alert("Digite um nome!");
     return;
   }
 
@@ -53,6 +59,7 @@ form.addEventListener("submit", async (e) => {
       id: g.gameID,
       nome: g.external,
       preco: g.cheapest,
+      loja: "CheapShark",
       img: g.steamAppID
         ? `https://cdn.akamai.steamstatic.com/steam/apps/${g.steamAppID}/capsule_sm_120.jpg`
         : "https://via.placeholder.com/120"
@@ -63,4 +70,5 @@ form.addEventListener("submit", async (e) => {
   mostrar();
 });
 
+// carregar ao abrir
 mostrar();
